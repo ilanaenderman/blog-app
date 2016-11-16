@@ -22,8 +22,8 @@ app.use(session({
 
 
 //Contect to database
-//const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
-const db = new sequelize('postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/blog')
+const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
+//const db = new sequelize('postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/blog')
 
 //define models
 let User = db.define('user', {
@@ -65,6 +65,8 @@ app.get('/', (request, response) => {
 //Login
 
 app.post('/login', (request, response) => {
+
+
 	if(request.body.email.length === 0) {
 		response.redirect('/?message=' + encodeURIComponent("Please fill out your email address."));
 		return;
@@ -80,13 +82,18 @@ app.post('/login', (request, response) => {
 			email: request.body.email
 		}
 	}).then( (user) => {
-		if (user !== null && request.body.password === user.password) {
+		var hash = user.password
+		console.log(hash)
+
+		bcrypt.compare(request.body.password, hash, (err, res) => { 
+		if (user !== null && res == true) {
 			request.session.user = user;
 			response.redirect('/profile');
 		} else {
 			response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
-		}
-	}, (error) => {
+			}
+		})
+		}, (error) => {
 		response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
 	});
 });
@@ -97,17 +104,19 @@ app.get('/register', (request, response) => {
 })
 
 app.post('/register', (request, response) => {
-	User.create({
-		fname: request.body.fname,
-		lname: request.body.lname,
-		email: request.body.email,
-		password: request.body.password
-
-	}).then( newUser => {
+	bcrypt.hash(request.body.password, 2, (err, hash) => {
+		User.create({
+			fname: request.body.fname,
+			lname: request.body.lname,
+			email: request.body.email,
+			password: hash
+		}).then( newUser => {
 		console.log(newUser)
 		response.redirect('/')
+		})
 	})
 })
+
 
 // Profile
 //_______________________________________
@@ -256,7 +265,7 @@ db.sync({force: true}).then( () => {
 		userId: 1
 	})
 	Comment.create({
-		body: 'Succes met je blog.',
+		body: 'Goodluck with your blog.',
 		userId: 1,
 		postId: 1
 	}).then( () => {
