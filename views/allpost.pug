@@ -1,0 +1,63 @@
+html
+	head
+		script(src='/main.js')
+		script(src='/jquery-3.1.1.min.js')
+		script(src='/custom.js')
+
+		link( href="/css/materialize.min.css" type="text/css" rel="stylesheet" )
+		link( href="/style.css" type="text/css" rel="stylesheet" )
+		
+	body
+		nav
+			div.nav-wrapper
+				a#logo.brand-logo Blog 
+
+				ul.right
+					li 
+						a#logo= user.fname + " " + user.lname
+					li
+						a(href='/profile') Home
+					li
+						a(href='/newpost') Write Post
+					li
+						a(href='/mypost') My Posts
+					li
+						a(href='/allpost') All Posts
+					li
+						a(href='/logout') Log Out
+			
+		div#header.valign-wrapper
+			div.row.valign
+				div.col.l12
+		main
+			div.container
+				div.row
+					div.col.l8.offset-l2
+						div#topcard.card
+							div.card-content
+								div(class='container')
+									div(class='head')
+										h2 Posts All Users
+									br
+									each thing in addpost
+										div.card-content
+											div(class='head')
+												h4 #{thing.title}
+												p #{thing.body} 
+												br
+												p#author By #{thing.user.fname} #{thing.user.lname}
+												hr(id='newMessage')
+												form( method='post' action='/allpost')
+													button#button(type='submit' class ='btn btn-default' name='postID' value=thing.id) Go to blog
+												br
+												
+									br
+
+
+		footer.page-footer
+			div.container
+				div.container.grey-text © 2016 Ilana Enderman
+
+		script( src="/jquery-3.1.1.min.js" )
+		script( src="/js/materialize.min.js" )
+		script( src="/main.js" )

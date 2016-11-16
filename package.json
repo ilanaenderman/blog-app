@@ -1,0 +1,28 @@
+{
+  "name": "blog-app",
+  "version": "0.0.1",
+  "description": "blog application you can log in to and write and comment messages",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "pg": "^6.1.0",
+    "pug": "^2.0.0-beta6",
+    "sequelize": "^3.24.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilanaenderman/bulletin-app.git"
+  },
+  "author": "Ilana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ilanaenderman/bulletin-app/issues"
+  },
+  "homepage": "https://github.com/ilanaenderman/bulletin-app#readme"
+}

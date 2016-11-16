@@ -1,0 +1,42 @@
+tml
+	head
+		script(src='/main.js')
+
+		link( href="/css/materialize.min.css" type="text/css" rel="stylesheet" )
+		link( href="/style.css" type="text/css" rel="stylesheet" )
+	body
+		nav
+			div.nav-wrapper
+				a#logo.brand-logo Blog 
+				ul.right
+					li
+						a(href='/') Login
+			
+		div#header.valign-wrapper
+			div.row.valign
+				div.col.l12
+		main
+			div.container
+				div.row
+					div.col.l8.offset-l2
+						div#topcard.card
+							div.card-content
+								h2 Register
+								form(action='/register' method='post')
+									label Enter your first name
+									input#fName(type= "text" name='fname' required)
+									label Enter your last name
+									input#lName(type="text" name='lname' required)
+									label Enter your email
+									input#email(type="email" name='email' required)
+									label Enter your password
+									input#password(type ='password' name='password' required)
+									input(type='submit' class='btn btn-default' value='Register' id='submit')
+
+		footer.page-footer
+			div.container
+				div.container.grey-text © 2016 Ilana Enderman
+
+		script( src="/jquery-3.1.1.min.js" )
+		script( src="/js/materialize.min.js" )
+		script( src="/main.js" )

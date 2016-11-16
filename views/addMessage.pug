@@ -1,0 +1,39 @@
+html
+	head
+		title #{title}
+		link( href="/css/materialize.min.css" type="text/css" rel="stylesheet" )
+		link( href="/style.css" type="text/css" rel="stylesheet" )
+	body
+		nav
+			div.nav-wrapper
+				a#logo.brand-logo Blog
+				ul.right
+					li
+						a(href="/showMessage") Messages
+
+		div#header.valign-wrapper
+			div.row.valign
+				div.col.l12
+					h1.center.white-text 
+		main
+			div.container
+				div.row
+					div.col.l8.offset-l2
+						div#topcard.card
+							div.card-content
+								form(id='contact' method ='POST' action ='/addMessage')
+									div(class='container')
+										div(class='head')
+											h2 NEW MESSAGE
+										input(name='title' type='text' placeholder='Title')
+										input(name='message' type='text' placeholder='Write message')
+										div(class='write')
+										input(id='submit' type='submit' value='Send')
+
+										br
+		footer.page-footer
+			div.container
+				div.container.grey-text © 2016 Ilana Enderman
+		script( src="/jquery-3.1.1.min.js" )
+		script( src="/js/materialize.min.js" )
+		script( src="/main.js" )
