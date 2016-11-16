@@ -46,3 +46,13 @@ main {
 h2{
   text-align: center;
 }
+
+#body {
+  font-size: 20px;
+}
+
+#commentLine{
+  height: 2px;
+  color: black;
+  background-color: black;
+}

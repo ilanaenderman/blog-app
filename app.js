@@ -5,6 +5,7 @@ const bodyParser 	= require('body-parser')
 const session 		= require('express-session')
 const pug			= require('pug')
 const pg 			= require('pg')
+const bcrypt		= require('bcrypt')
 
 const app			= express()
 
@@ -21,7 +22,8 @@ app.use(session({
 
 
 //Contect to database
-const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
+//const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
+const db = new sequelize('postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/blog')
 
 //define models
 let User = db.define('user', {
@@ -62,7 +64,7 @@ app.get('/', (request, response) => {
 
 //Login
 
-app.post('/login', bodyParser.urlencoded({extended: true}), (request, response) => {
+app.post('/login', (request, response) => {
 	if(request.body.email.length === 0) {
 		response.redirect('/?message=' + encodeURIComponent("Please fill out your email address."));
 		return;
@@ -94,7 +96,7 @@ app.get('/register', (request, response) => {
 	response.render( 'register' )
 })
 
-app.post('/register', bodyParser.urlencoded({extended: true}), (request, response) => {
+app.post('/register', (request, response) => {
 	User.create({
 		fname: request.body.fname,
 		lname: request.body.lname,
@@ -128,7 +130,7 @@ app.get('/newpost', (request, response) => {
 	response.render('newpost', {user: user})
 })
 
-app.post('/newpost', bodyParser.urlencoded({extended: true}), (request, response) => {
+app.post('/newpost', (request, response) => {
 	var user = request.session.user
 	
 	Post.create({
@@ -168,7 +170,7 @@ app.get('/allpost', (request, response) => {
 	})
 })
 
-app.post('/allpost', bodyParser.urlencoded({extended: true}), (request, response) => {
+app.post('/allpost', (request, response) => {
 	var user = request.session.user
 
 	Post.findAll({
@@ -202,7 +204,7 @@ app.get('/post', (request, response) => {
 
 // Create Comments on Specific Page
 
-app.post('/post', bodyParser.urlencoded({extended: true}), (request, response) => {
+app.post('/post', (request, response) => {
 	var user = request.session.user
 
 	Comment.create({

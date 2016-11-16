@@ -36,18 +36,26 @@ html
 							div.card-content
 								div(class='container')
 									div(class='head')
-										h2 Specific Post
+										each thing in specific
+											h2 #{thing.title}
 									br
 									each thing in specific
 										div.card-content
 											div(class='head')
-												h4 #{thing.title}
-												p #{thing.body}
+												
+												p#body #{thing.body}
 												br
 												p#author By #{thing.user.fname} #{thing.user.lname}
 												br
-											hr(id='newMessage')
+												
+											hr#commentLine
+											br
+											br
 											h5 Comments
+											br
+											- for(var i = 0; i < thing.comments.length; i++)
+													p #{thing.comments[i].body} - #{thing.comments[i].user.fname} #{thing.comments[i].user.lname}
+											br
 											form(method='post' action='/post')
 												input(name='comment' id='input' type='text' placeholder='Enter Comment')
 												input(name='postID' value= thing.id type='hidden')
@@ -55,12 +63,12 @@ html
 												button#button(type='submit' class='btn btn-default') Comment
 												br
 												br
-												- for(var i = 0; i < thing.comments.length; i++)
-													p #{thing.comments[i].body} - #{thing.comments[i].user.fname} #{thing.comments[i].user.lname}
+												
 
 		footer.page-footer
 			div.container
 				div.container.grey-text © 2016 Ilana Enderman
+				br
 
 		script( src="/jquery-3.1.1.min.js" )
 		script( src="/js/materialize.min.js" )

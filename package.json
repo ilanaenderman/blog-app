@@ -4,6 +4,7 @@
   "description": "blog application you can log in to and write and comment messages",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
