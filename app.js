@@ -242,20 +242,21 @@ app.get('/logout',  (request, response)  =>{
 
 
 // Sync
+//Create test User, Post and Comment
 db.sync({force: true}).then( () => {
 	User.create({
 		fname: "Ilana",
 		lname: "Enderman",
 		email: "ilana@hotmail.com",
-		password: "hocuspocus"
+		password: "password"
 	})
 	Post.create({
-		title: 'A Day at the park',
-		body: 'I had a nice day at the park, I played in the sun and ate some ice cream.',
+		title: 'First Blog Post',
+		body: 'This is my first blog post. I hope people will read it and like what I have to say.',
 		userId: 1
 	})
 	Comment.create({
-		body: 'Groetjes',
+		body: 'Succes met je blog.',
 		userId: 1,
 		postId: 1
 	}).then( () => {
