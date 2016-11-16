@@ -1,2 +1,1 @@
-# bulletin-app
-bulletin board application
+# Blog Application
