@@ -252,28 +252,29 @@ app.get('/logout',  (request, response)  =>{
 
 // Sync
 //Create test User, Post and Comment
-db.sync({force: true}).then( () => {
-	User.create({
-		fname: "Ilana",
-		lname: "Enderman",
-		email: "ilana@hotmail.com",
-		password: "password"
+db.sync({force: false}).then( () => {
+	bcrypt.hash('password', 2, (err, hash) => {
+		User.create({
+			fname: "Ilana",
+			lname: "Enderman",
+			email: "ilana@hotmail.com",
+			password: hash
+		})
+		Post.create({
+			title: 'First Blog Post',
+			body: 'This is my first blog post. I hope people will read it and like what I have to say.',
+			userId: 1
+		})
+		Comment.create({
+			body: 'Goodluck with your blog.',
+			userId: 1,
+			postId: 1
+		})
 	})
-	Post.create({
-		title: 'First Blog Post',
-		body: 'This is my first blog post. I hope people will read it and like what I have to say.',
-		userId: 1
-	})
-	Comment.create({
-		body: 'Goodluck with your blog.',
-		userId: 1,
-		postId: 1
-	}).then( () => {
-		var server = app.listen(8000, () => {
-			console.log('Example app listening on port: ' + server.address().port);
-		});
-	});
-}, (error) => {
-	console.log('sync failed: ');
-	console.log(error);
-});
+})
+
+
+//Listen port 8000
+app.listen(8000, () => {
+			console.log('Server is running')
+})
