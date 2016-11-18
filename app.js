@@ -27,8 +27,7 @@ const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
 
 //define models
 let User = db.define('user', {
-	fname: sequelize.STRING,
-	lname: sequelize.STRING,
+	name: sequelize.STRING,
 	email: sequelize.STRING,
 	password: sequelize.STRING
 })
@@ -68,7 +67,7 @@ app.post('/login', (request, response) => {
 
 
 	if(request.body.email.length === 0) {
-		response.redirect('/?message=' + encodeURIComponent("Please fill out your email address."));
+		response.redirect('/?message=' + encodeURIComponent("Please fill out your email."));
 		return;
 	}
 
@@ -83,36 +82,79 @@ app.post('/login', (request, response) => {
 		}
 	}).then( (user) => {
 		var hash = user.password
-		console.log(hash)
 
 		bcrypt.compare(request.body.password, hash, (err, res) => { 
-		if (user !== null && res == true) {
-			request.session.user = user;
-			response.redirect('/profile');
-		} else {
-			response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
+			if (user !== null && res == true) {
+				request.session.user = user
+				response.redirect('/profile')
+			} 
+			else {
+				response.redirect('/?message=' + encodeURIComponent("Invalid email or password."))
 			}
 		})
 		}, (error) => {
-		response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
-	});
-});
+			response.redirect('/?message=' + encodeURIComponent("Invalid email or password."))
+	})
+})
 
 // Register
 app.get('/register', (request, response) => {
-	response.render( 'register' )
+
+	response.render( 'register', {message: request.query.message} )
 })
 
 app.post('/register', (request, response) => {
-	bcrypt.hash(request.body.password, 2, (err, hash) => {
-		User.create({
-			fname: request.body.fname,
-			lname: request.body.lname,
-			email: request.body.email,
-			password: hash
-		}).then( newUser => {
-		console.log(newUser)
-		response.redirect('/')
+	let name 	= request.body.name
+	let eMail 	= request.body.email
+	let pWord 	= request.body.password
+	let pCon	= request.body.conPassword
+	let firstChar= name.substr(0,1)
+
+	if( name.length === 0) {
+		response.redirect('/register?message=' + encodeURIComponent("Please fill out your name."))
+		return
+	}
+	if( !firstChar.match(/[a-zA-Z ]/)) {
+		response.redirect('/register?message=' + encodeURIComponent("First letter must me alphabetic."))
+		return
+	}
+	if( eMail.length === 0) {
+		response.redirect('/register?message=' + encodeURIComponent("Please fill out your email address."))
+		return
+	}
+	if( !eMail.match(/@/)){
+		response.redirect('/register?message=' + encodeURIComponent("Please fill in a valid email address."))
+		return
+	}
+	if( pWord.length < 8 ){
+		response.redirect('/register?message=' + encodeURIComponent("Password is too short."))
+		return
+	}
+	if( pCon !==  pWord ) {
+		response.redirect('/register?message=' + encodeURIComponent("Not the same password."))
+		return
+	}
+
+	User.findOne({
+		where: {
+			$or: [{
+				name: name
+			},{
+				email: eMail 
+			}]
+		}
+	}).then (user => {
+		bcrypt.hash(request.body.password, 2, (err, hash) => {
+			if(user == null) {
+				User.create({
+					name: request.body.Name,
+					email: request.body.email,
+					password: hash
+				})
+				response.redirect('/?message=' + encodeURIComponent("Succesfully registered."))
+			} else {
+				response.redirect('/register?message=' + encodeURIComponent("Name or email already in use."))
+			}
 		})
 	})
 })
@@ -252,11 +294,10 @@ app.get('/logout',  (request, response)  =>{
 
 // Sync
 //Create test User, Post and Comment
-db.sync({force: false}).then( () => {
-	bcrypt.hash('password', 2, (err, hash) => {
+db.sync({force: true}).then( database => {
+	bcrypt.hash('password1', 2, (err, hash) => {
 		User.create({
-			fname: "Ilana",
-			lname: "Enderman",
+			name: "Ilana Enderman",
 			email: "ilana@hotmail.com",
 			password: hash
 		})

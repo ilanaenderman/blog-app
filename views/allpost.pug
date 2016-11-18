@@ -14,7 +14,7 @@ html
 
 				ul.right
 					li 
-						a#logo= user.fname + " " + user.lname
+						a#logo= user.name
 					li
 						a(href='/profile') Home
 					li
@@ -45,7 +45,7 @@ html
 												h4 #{thing.title}
 												p #{thing.body} 
 												br
-												p#author By #{thing.user.fname} #{thing.user.lname}
+												p#author By #{thing.user.name}
 												hr(id='newMessage')
 												form( method='post' action='/allpost')
 													button#button(type='submit' class ='btn btn-default' name='postID' value=thing.id) Go to blog

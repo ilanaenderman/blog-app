@@ -13,7 +13,7 @@ html
 
 				ul.right
 					li 
-						a#logo= user.fname + " " + user.lname
+						a#logo= user.name
 					li
 						a(href='/profile') Home
 					li
@@ -45,7 +45,7 @@ html
 												
 												p#body #{thing.body}
 												br
-												p#author By #{thing.user.fname} #{thing.user.lname}
+												p#author By #{thing.user.name}
 												br
 												
 											hr#commentLine
@@ -54,7 +54,7 @@ html
 											h5 Comments
 											br
 											- for(var i = 0; i < thing.comments.length; i++)
-													p #{thing.comments[i].body} - #{thing.comments[i].user.fname} #{thing.comments[i].user.lname}
+													p #{thing.comments[i].body} - #{thing.comments[i].user.name}
 											br
 											form(method='post' action='/post')
 												input(name='comment' id='input' type='text' placeholder='Enter Comment')

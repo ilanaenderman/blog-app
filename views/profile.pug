@@ -13,7 +13,7 @@ html
 
 				ul.right
 					li 
-						a#logo= user.fname + " " + user.lname
+						a#logo= user.name
 					li
 						a(href='/profile') Home
 					li
@@ -39,7 +39,7 @@ html
 										div(class='head')
 											h2 Profile
 										br
-										h3= user.fname + " " + user.lname
+										h3= user.name
 										br
 
 		footer.page-footer

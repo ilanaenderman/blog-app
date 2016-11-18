@@ -12,7 +12,7 @@ html
 				a#logo.brand-logo Blog
 				ul.right
 					li 
-						a#logo= user.fname + " " + user.lname
+						a#logo= user.name
 					li
 						a(href='/profile') Home
 					li
@@ -37,7 +37,7 @@ html
 							div.card-content
 								div(class='container')
 									div(class='head')
-										h2= user.fname + "'s posts"
+										h2= user.name + "'s posts"
 									br
 									each thing in addpost
 										div.card-content

@@ -23,15 +23,17 @@ tml
 							div.card-content
 								h2 Register
 								form(action='/register' method='post')
-									label Enter your first name
-									input#fName(type = "text" name = 'fname' required)
-									label Enter your last name
-									input#lName(type = "text" name = 'lname' required)
+									label Enter your name
+									input#name(type = "text" name = 'name' required)
 									label Enter your email
-									input#email(type = "email" name = 'email' required)
+									input#email(type = "text" name = 'email' required)
 									label Enter your password
 									input#password(type ='password' name='password' required)
+									label Confirm your password
+									input#conPassword(type = "password" name = 'conPassword' required)
 									input(type='submit' class='btn btn-default' value='Register' id='submit')
+
+								h2#error-message= message
 
 		footer.page-footer
 			div.container
