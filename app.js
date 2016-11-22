@@ -147,7 +147,7 @@ app.post('/register', (request, response) => {
 		bcrypt.hash(request.body.password, 2, (err, hash) => {
 			if(user == null) {
 				User.create({
-					name: request.body.Name,
+					name: request.body.name,
 					email: request.body.email,
 					password: hash
 				})
