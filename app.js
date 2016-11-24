@@ -22,8 +22,8 @@ app.use(session({
 
 
 //Contect to database
-//const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
-const db = new sequelize('postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/blog')
+const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
+//const db = new sequelize('postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/blog')
 
 //define models
 let User = db.define('user', {
