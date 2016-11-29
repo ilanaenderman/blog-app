@@ -1,4 +1,4 @@
-//Including the necesarry modules
+// Including the necesarry modules
 const sequelize 	= require('sequelize')
 const express 		= require('express')
 const bodyParser 	= require('body-parser')
@@ -22,11 +22,13 @@ app.use(session({
 }))
 
 
-//Contect to database
-const db = new sequelize('postgres://floriandalhuijsen@localhost/blog')
-//const db = new sequelize('postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/blog')
+// Contect to database
+const db = new Sequelize('blog', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+	host: 'localhost',
+	dialect: 'postgres'
+})
 
-//define models
+// Define models
 let User = db.define('user', {
 	name: sequelize.STRING,
 	email: sequelize.STRING,
@@ -42,7 +44,7 @@ let Comment = db.define('comment', {
 	body: sequelize.STRING,
 })
 
-//define relation
+// Define relation
 User.hasMany( Post )
 User.hasMany( Comment )
 
@@ -54,7 +56,7 @@ Comment.belongsTo( User )
 
 
 
-//Route Log in page
+// Route Log in page
 app.get('/', (request, response) => {
 	response.render('index', {
 		message: request.query.message,
@@ -62,7 +64,7 @@ app.get('/', (request, response) => {
 	});
 });
 
-//Login
+// Login
 
 app.post('/login', (request, response) => {
 
@@ -294,7 +296,7 @@ app.get('/logout',  (request, response)  =>{
 
 
 // Sync
-//Create test User, Post and Comment
+// Create test User, Post and Comment
 db.sync({force: true}).then( database => {
 	bcrypt.hash('password1', 2, (err, hash) => {
 		User.create({
@@ -316,7 +318,7 @@ db.sync({force: true}).then( database => {
 })
 
 
-//Listen port 8000
+// Listen port 8000
 app.listen(8000, () => {
 			console.log('Server is running')
 })
