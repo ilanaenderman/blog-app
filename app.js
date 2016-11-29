@@ -6,6 +6,7 @@ const session 		= require('express-session')
 const pug			= require('pug')
 const pg 			= require('pg')
 const bcrypt		= require('bcrypt')
+const sass			= require('node-sass')
 
 const app			= express()
 

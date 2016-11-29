@@ -1,0 +1,52 @@
+$gold: #F8D480;
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-size: 20px;
+
+  nav, footer.page-footer {
+    background-color: black;
+
+    #logo {
+      padding-left: 10px;
+      color: $gold
+    }
+  }
+
+  #header {
+    min-height: 500px;
+    background-color: grey;
+    background-image: url('/message.jpg');
+    background-position: center;
+    background-size: cover;
+  }
+
+  main {
+    flex: 1 0 auto;
+
+    #topcard {
+      margin-top: -80px;
+
+      h2{
+        text-align: center;
+      }
+      #author {
+        font-style: italic;
+      }        
+      #commentLine {
+        height: 2px;
+        color: black;
+        background-color: black;
+      }
+    }
+  }
+}
+
+.user {
+  font-size: 10px;
+  color: teal;
+}
+
+

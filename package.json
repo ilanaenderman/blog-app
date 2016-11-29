@@ -8,6 +8,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
+    "node-sass": "^3.13.0",
     "pg": "^6.1.0",
     "pug": "^2.0.0-beta6",
     "sequelize": "^3.24.8"
@@ -17,13 +18,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ilanaenderman/bulletin-app.git"
   },
   "author": "Ilana",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ilanaenderman/bulletin-app/issues"
   },
-  "homepage": "https://github.com/ilanaenderman/bulletin-app#readme"
 }
