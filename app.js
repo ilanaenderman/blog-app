@@ -23,7 +23,7 @@ app.use(session({
 
 
 // Contect to database
-const db = new Sequelize('blog', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+const db = new sequelize('blog', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
 	host: 'localhost',
 	dialect: 'postgres'
 })
@@ -252,7 +252,7 @@ app.get('/post', (request, response) => {
 			model: User
 		}]
 	}).then ( specificpost => {
-		response.render('post', {user: user, specific, specificpost})
+		response.render('post', {user: user, specific: specificpost})
 	})
 })
 
@@ -275,7 +275,6 @@ app.post('/post', (request, response) => {
 				model: User
 			}]
 		}).then( specificpost => {
-			console.log(comment)
 			response.render('post', {user: user, specific: specificpost})
 		})
 	})

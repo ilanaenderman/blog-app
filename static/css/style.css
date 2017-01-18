@@ -6,10 +6,12 @@ body {
   body nav, body footer.page-footer {
     background-color: black; }
     body nav #logo, body footer.page-footer #logo {
-      padding-left: 10px;
+      padding-left: 100px;
       color: #F8D480; }
+    body nav ul, body footer.page-footer ul {
+      padding-right: 100px; }
   body #header {
-    min-height: 500px;
+    min-height: 400px;
     background-color: grey;
     background-image: url("/message.jpg");
     background-position: center;

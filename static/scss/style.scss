@@ -10,13 +10,17 @@ body {
     background-color: black;
 
     #logo {
-      padding-left: 10px;
+      padding-left: 100px;
       color: $gold
+    }
+
+    ul {
+      padding-right: 100px;
     }
   }
 
   #header {
-    min-height: 500px;
+    min-height: 400px;
     background-color: grey;
     background-image: url('/message.jpg');
     background-position: center;
