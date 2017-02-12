@@ -44,7 +44,7 @@ html
 											p #{thing.body}
 											br
 											hr(id='newMessage')
-											form( method='post' action='/allpost')
+											form( method='post' action='/allpost' autocomplete='off')
 												button#button(type='submit' class ='btn btn-default' name='postID' value=thing.id) Go to blog
 											br
 									br
