@@ -15,7 +15,8 @@ db.conn = new sequelize('blog', process.env.POSTGRES_USER, process.env.POSTGRES_
 db.user = db.conn.define('user', {
 	name: sequelize.STRING,
 	email: sequelize.STRING,
-	password: sequelize.STRING
+	password: sequelize.STRING,
+	photo: sequelize.STRING
 })
 
 db.post = db.conn.define('post', {
@@ -44,7 +45,8 @@ db.conn.sync({force: true}).then( database => {
 		db.user.create({
 			name: "Ilana Enderman",
 			email: "ilana@hotmail.com",
-			password: hash
+			password: hash,
+			photo: 'images/ilana.jpg'
 		})
 		db.post.create({
 			title: 'First Blog Post',

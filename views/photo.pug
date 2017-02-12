@@ -1,0 +1,61 @@
+html
+	head
+		script(src='/jquery-3.1.1.min.js')
+		script(src='/custom.js')
+
+		link( href="/css/materialize.min.css" type="text/css" rel="stylesheet" )
+		link( href="/css/style.css" type="text/css" rel="stylesheet" )
+	body
+		nav
+			div.nav-wrapper
+				a#logo.brand-logo Blog 
+
+				ul.right
+					li 
+						a#logo= user.name
+					li
+						a(href='/profile') Home
+					li
+						a(href='/newpost') Write Post
+					li
+						a(href='/mypost') My Posts
+					li
+						a(href='/allpost') All Posts
+					li
+						a(href='/photo') Change Photo
+					li
+						a(href='/logout') Log Out
+			
+		div#header.valign-wrapper
+			div.row.valign
+				div.col.l12
+		main
+			div.container
+				div.row
+					div.col.l12
+						div#topcard.card
+							div.card-content
+								div(class='container')
+									div(class='head')
+										h2 Change Photo
+									br
+									form(id='contact' method ='POST' enctype='multipart/form-data' action ='/photo')
+										div.file-field.input-field
+											div.btn
+												span File
+												input(type='file' name='photo')
+											div.file-path-wrapper
+												input.file-path.validate(type='text')
+										input#submit.btn.btn-default(type= 'submit' value= 'send')
+
+									br
+									h4= message
+
+		footer.page-footer
+			div.container
+				div.container.grey-text © 2016 Ilana Enderman
+				br
+
+		script( src="/jquery-3.1.1.min.js" )
+		script( src="/js/materialize.min.js" )
+		script( src="/main.js" )

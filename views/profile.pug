@@ -22,6 +22,8 @@ html
 					li
 						a(href='/allpost') All Posts
 					li
+						a(href='/photo') Change Photo
+					li
 						a(href='/logout') Log Out
 			
 		div#header.valign-wrapper
@@ -36,9 +38,9 @@ html
 								form(id='contact' method ='POST' action ='/profile')
 									div(class='container')
 										div(class='head')
-											h2 Profile
+											h2= user.name 
 										br
-										h3= user.name
+										img.responsive-img(src= user.photo)
 										br
 
 		footer.page-footer
